@@ -1,7 +1,5 @@
 package intro.practices;
 
-import java.sql.SQLOutput;
-
 public class FindVowels {
 
     public static void main(String[] args) {
