@@ -14,6 +14,7 @@ public class FindNumber {
                 break;
             }
         }
+
         if (isThere) {
             System.out.println("The number exists!");
         } else {
