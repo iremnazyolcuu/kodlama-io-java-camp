@@ -4,13 +4,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        StudentLoanManager studentLoanManager = new StudentLoanManager();
-        studentLoanManager.calculateBaseLoan();
+        TeachersCreditManager teachersCreditManager = new TeachersCreditManager();
+        teachersCreditManager.calculate();
 
-        LoanUI loanUI = new LoanUI();
-        loanUI.calculateLoanUI(new StudentLoanManager());
-        loanUI.calculateLoanUI(new BusinessLoanManager());
-        loanUI.calculateLoanUI(new HomeLoanManager());
-
+        CreditUI creditUI = new CreditUI();
+        creditUI.calculateCredit(new TeachersCreditManager());
+        creditUI.calculateCredit(new AgriculturalCreditManager());
     }
 }
