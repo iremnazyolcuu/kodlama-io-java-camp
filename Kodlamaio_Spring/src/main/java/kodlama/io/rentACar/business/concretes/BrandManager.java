@@ -5,6 +5,7 @@ import kodlama.io.rentACar.business.dto.requests.CreateBrandRequest;
 import kodlama.io.rentACar.business.dto.requests.UpdateBrandRequest;
 import kodlama.io.rentACar.business.dto.responses.GetAllBrandsResponse;
 import kodlama.io.rentACar.business.dto.responses.GetByIdBrandResponse;
+import kodlama.io.rentACar.business.rules.BrandBusinessRules;
 import kodlama.io.rentACar.core.utilities.mappers.ModelMapperService;
 import kodlama.io.rentACar.dataAccess.abstracts.BrandRepository;
 import kodlama.io.rentACar.entities.concretes.Brand;
@@ -21,12 +22,13 @@ public class BrandManager implements BrandService {
     // injection
     private BrandRepository brandRepository;
     private ModelMapperService modelMapperService;
+    private BrandBusinessRules brandBusinessRules;
 
     @Override
     public List<GetAllBrandsResponse> getAll() {
         List<Brand> brands = brandRepository.findAll();
         List<GetAllBrandsResponse> brandsResponse = brands.stream().map(brand -> this.modelMapperService.forResponse().map(brand, GetAllBrandsResponse.class)).collect(Collectors.toList());
-        return null;
+        return brandsResponse;
     }
 
     @Override
@@ -38,6 +40,7 @@ public class BrandManager implements BrandService {
 
     @Override
     public void add(CreateBrandRequest createBrandRequest) {
+        this.brandBusinessRules.checkIfBrandNameExists(createBrandRequest.getName());
         Brand brand = this.modelMapperService.forRequest().map(createBrandRequest, Brand.class);
         this.brandRepository.save(brand);
     }
