@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "brands")
 @Data
@@ -19,5 +21,11 @@ public class Brand {
 
     @Column(name = "name")
     private String name;
+
+    // mappedBy: ilişkilendirilme Model nesnesinde hangi alanla yapılacak
+    // Model.java
+    // private Brand brand ile
+    @OneToMany(mappedBy = "brand")
+    private List<Model> models;
 
 }
